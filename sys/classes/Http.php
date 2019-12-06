@@ -68,6 +68,8 @@ final class Http {
 	 */
 	final public static function getRequestedPath() {
 		$request = filter_input(INPUT_SERVER, 'REQUEST_URI');
+		//Added to fix some issues regarding error 404 when handling url with GET parameters
+		$request = substr($request, 0, strpos($request, '?'));
 		$request = substr($request, strlen(Config::PATH));
 		return $request;
 	}
